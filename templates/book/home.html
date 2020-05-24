@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 my-4  mx-auto">
+            <h1 class="text-center">Search Books</h1>
+            <form method="POST">{% csrf_token %}
+                <div class="form-group text-center">
+                    <input class="search-input" type="text" name="q" id="search-input"
+                        placeholder="Search Books by Title, Author or ISBN">
+                    <button class="primary-btn" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for book in books %}
+        {{ startIndexes}}
+        <div class="col-md-3 my-3">
+            <div class="card  d-flex align-items-stretch custom-card">
+                <div class="imageLink text-center">
+                    <a href="{% url 'book_detail'  book.id %}"><img src="{{ book.thumbnail }}" alt=""></a>
+                </div>
+                <div class="book-info">
+                    <p class="card-text text-center">{{book.title }}</p>
+                    <p class="text-muted">{{book.author}}</p>
+                    <p>{{book.publisher}} </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+        {% if request.method == "POST" %}
+        {%  if books %}
+        <div class="pagination">
+            {% if previous_page_number %}
+            <form class="pagination-form" action='{% url "home"  %}?page={{previous_page_number}}' method="POST">
+                {% csrf_token %}
+                <div class="form-group text-center">
+                    <input class="search-input" type="hidden" value="{{q_value}}" name="q" id="search-input"
+                        placeholder="Search Books by Title, Author or ISBN">
+                    <button class="pagination-btn" type="submit">&laquo;</button>
+                </div>
+            </form>
+            {% endif %}
+            <li class="page-item active">
+                <button class="pagination-btn" class="page-link">{{ page_number }}</button>
+            </li>
+            <form class="pagination-form" action='{% url "home"  %}?page={{ next_page_number }}' method="POST">
+                {% csrf_token %}
+                <div class="form-group text-center">
+                    <input class="search-input" type="hidden" value="{{q_value}}" name="q" id="search-input"
+                        placeholder="Search Books by Title, Author or ISBN">
+                    <button class="pagination-btn" type="submit">&raquo;</button>
+                </div>
+            </form> 
+        </div>
+        {% endif %}
+        {% endif %}
+
+
+
+    </div>
+</div>
+
+
+
+{% endblock content %}

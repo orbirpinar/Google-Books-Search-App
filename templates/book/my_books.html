@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container my-4">
+    <h3>My Books</h3>
+    <hr>
+    <button id="general" class=" primary-btn">General Table</button>
+    <button id="read" class=" primary-btn">Reading List</button>
+    <button id="to_read" class="primary-btn">To Read</button>
+    <button id="cur_read" class="primary-btn">Currently Reading</button>
+    <!--GENERAL-->
+    <div class="general my-4">
+        {% if not books.all %}
+        <p>There is no book in your list</p>
+        {% else %}
+        <table class="table gen-table ">
+            <thead>
+                <tr class="row-title">
+                    <th scope="col">#</th>
+                    <th scope="col">Cover</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Number Of Pages</th>
+                    <th scope="col">Reading Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+
+                <tr id="book-table-{{book.book_id}}">
+
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><img src="{{ book.image_url }}" alt="cover"></td>
+                    <td><a href="{% url 'book_detail' book.book_id %}">{{ book.title }}</a></td>
+                    <td>{{book.author}}</td>
+                    <td>{{ book.page_count }}</td>
+                    <td>{{book.date_updated}}</td>
+                    <td>{{ book.get_read_status_display }}</td>
+                    <td><a class="delete-btn" id="{{ book.book_id }}" onclick="deleteBook('{{book.book_id}}')"
+                        data-url="{% url 'delete_book' book.book_id %}">&times;</a></td>
+
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+
+    <!--READ-->
+    <div class="reading" style="display: none;">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cover</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Number Of Pages</th>
+                    <th scope="col">Reading Date</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                {% if book.read_status == "R" %}
+                <tr id="book-table-{{book.book_id}}">
+
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><img src="{{ book.image_url }}" alt="cover"></td>
+                    <td><a href="{% url 'book_detail' book.book_id %}">{{ book.title }}</a></td>
+                    <td>{{book.author}}</td>
+                    <td>{{ book.page_count }}</td>
+                    <td>{{book.date_updated}}</td>
+                    <td>{{ book.get_read_status_display }}</td>
+                    <td></td>
+
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!--TO READ-->
+    <div class="to-read" style="display: none;">
+        <table class="table  ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cover</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Number Of Pages</th>
+                    <th scope="col">Reading Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                {% if book.read_status == "W" %}
+                <tr id="book-table-{{book.book_id}}">
+
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><img src="{{ book.image_url }}" alt="cover"></td>
+                    <td><a href="{% url 'book_detail' book.book_id %}">{{ book.title }}</a></td>
+                    <td>{{book.author}}</td>
+                    <td>{{ book.page_count }}</td>
+                    <td>{{book.date_updated}}</td>
+                    <td>{{ book.get_read_status_display }}</td>
+                    <td></td>
+
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!--CURRENTLY READ-->
+    <div class="cur-read" style="display: none;">
+        <table class="table   ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cover</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Number Of Pages</th>
+                    <th scope="col">Reading Date</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                {% if book.read_status == "C" %}
+                <tr id="book-table-{{book.book_id}}">
+
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><img src="{{ book.image_url }}" alt="cover"></td>
+                    <td><a href="{% url 'book_detail' book.book_id %}">{{ book.title }}</a></td>
+                    <td>{{book.author}}</td>
+                    <td>{{ book.page_count }}</td>
+                    <td>{{book.date_updated}}</td>
+                    <td>{{ book.get_read_status_display }}</td>
+                    <td></td>
+
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+
+<script>
+
+    document.getElementById('general').addEventListener('click',function(){
+        getDisplay('general')
+        getHide('to-read','cur-read','reading')
+    })
+
+
+    document.getElementById('read').addEventListener('click', function () {
+        getDisplay('reading')
+        getHide('general','to-read','cur-read') 
+
+
+
+    })
+    document.getElementById('to_read').addEventListener('click', function () {
+        getDisplay('to-read')
+        getHide('general','reading','cur-read') 
+
+
+    })
+    document.getElementById('cur_read').addEventListener('click', function () {
+       
+        getDisplay('cur-read')
+        getHide('general','to-read','reading') 
+
+
+    })
+
+
+    function getDisplay(el) {
+        document.querySelector(`.${el}`).style.display = 'block'
+    }
+
+    function getHide(el1,el2,el3){
+        document.querySelector(`.${el1}`).style.display = "none";
+        document.querySelector(`.${el2}`).style.display = "none";
+        document.querySelector(`.${el3}`).style.display = "none";
+
+    }
+
+
+
+    //Delete Book
+ 
+    function deleteBook(id) {
+        console.log($(`#${id}`))
+        $.ajax({
+            url: $(`#${id}`).data('url'),
+            data: {
+                'id': id
+            },
+            success: function (data) {
+                $(`#book-table-${data.book.book_id}`).html('');
+                console.log(data);
+
+
+
+            }
+        })
+    }
+</script>
+
+{% endblock content %}

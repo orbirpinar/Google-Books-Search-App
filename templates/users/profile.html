@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto my-3 account-container">
+            <div class="media">
+
+                <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
+                <div class="media-body">
+                    <h2 class="account-heading">{{user.username}}</h2>
+                    <p class="text">{{ user.email }}</p>
+                </div>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                <!-- we add multipart for saving image file -->
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">My Profile Page</legend>
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="primary-btn account-btn" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

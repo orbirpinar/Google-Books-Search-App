@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none!important;
+}
+body {
+    font-family: 'DM Mono', monospace;
+    line-height: 1.6;
+    background-color: #EFE9F4;
+}
+
+a{
+    text-decoration: none;
+    color:#1F1F28!important;
+}
+
+h1,
+h2 {
+    font-family: 'DM Mono', monospace;
+}
+
+p {
+    color: #000;
+}
+
+.navbar span {
+    color: #EBC067;
+}
+
+.navbar-custom {
+    background-color: #1F1F28 !important;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #F6F4F2 !important;
+}
+
+.navbar-custom .nav-link {
+    color: #F6F4F2 !important;
+}
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: rgb(190, 183, 183) !important;
+}
+
+.navbar .navbar-toggler {
+    color: #F6F4F2 !important;
+}
+
+
+
+/* Change Toggler Color */
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(246, 244, 242, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.primary-btn {
+    padding: 5px 10px;
+    background-color: #EBC067;
+    border: none;
+    border-radius: 3px;
+    color: #1F1F28;
+}
+
+.primary-btn:hover {
+    background-color: rgb(231, 173, 56);
+}
+
+/* SEARCH */
+.form-group .search-input {
+    width: 80%;
+    border-radius: 3px;
+    border: 1px solid #6C5B84;
+    padding: 5px;
+}
+
+.form-group .search-input:focus {
+    outline: none;
+}
+
+
+
+
+
+/*Card*/
+
+.custom-card {
+    border: none;
+}
+
+.book-info::first-child {
+    line-height: 1.6;
+}
+
+.book-info p {
+    line-height: 0.3;
+    font-size: 12px;
+    text-align: center;
+}
+
+.book-info p:first-child {
+    line-height: 1.6;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.imageLink {
+    transition: all .5s ease-in;
+    opacity: .8;
+}
+
+.imageLink:hover {
+    opacity: 1
+}
+
+
+/*BOOK DETAIL*/
+.book-detail-info p {
+    line-height: 0.3;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+/*STARS*/
+.stars-outer {
+    position: relative;
+    display: inline-block;
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+
+.stars-outer::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #ccc;
+}
+
+.stars-inner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #f8ce0b;
+}
+
+
+.floats .info-title {
+    float: left;
+    width: 25%;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin: 1px 0;
+}
+
+.floats .info-item {
+    float: left;
+    width: 75%;
+    font-size: 0.7rem;
+    margin: 1px 0;
+}
+
+
+
+select {
+    font-family: 'FontAwesome', 'sans-serif';
+    padding: 5px;
+    margin-top: 1em;
+}
+
+select:active,
+select:hover {
+    outline: none
+}
+
+
+/*My Books*/
+
+.row-title {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.table a {
+    color: #1F1F28;
+    cursor: pointer;
+}
+
+.table img {
+    max-width: 60px;
+}
+
+.delete-btn {
+    font-size: 20px;
+}
+
+
+/*PAGINATION*/
+
+.pagination {
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-form {
+    float: left;
+    padding-left: 25px;
+}
+
+.page-item {
+    padding-left: 25px;
+}
+
+.pagination-btn {
+    padding: 5px 10px;
+    background-color: #1F1F28;
+    border: none;
+    border-radius: 3px;
+    color: #EBC067;
+}
+
+
+.pagination-btn:hover {
+    background-color: rgb(50, 50, 59);
+}
+
+
+/*Profile*/
+
+.account-navbar-img {
+    height: 30px;
+    width: 30px;
+}
+
+.avatar .dropdown-item:hover {
+    background-color: #EBC067;
+    ;
+}
+
+
+.account-container {
+    margin-top:20px;
+    background-color: #fff;
+    -webkit-box-shadow: 3px 0px 30px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 0px 30px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 0px 30px -4px rgba(0, 0, 0, 0.75);
+}
+.account-container legend{
+    font-size: 28px;
+    font-weight: 700;
+    color:#000;
+}
+.form-group{
+    text-align: center;
+}
+
+
+.form-custom:focus{
+    border:none
+}
+.register-image-container{
+    background: url(../img/books.jpg);
+    background-size: cover;
+}
+
+.controls input{
+    width:100%;
+    border:2px solid #EBC067;
+}
+
+.account-btn{
+    width: 100%;
+}
+
+.control-label{
+    color:#000;
+}
+
+
+.account-img {
+    height: 150px;
+    width: 150px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  #id_image{
+      border:none;
+  }
+
+  #id_bio{
+      border:2px solid #EBC067;
+      width: 100%;
+  }

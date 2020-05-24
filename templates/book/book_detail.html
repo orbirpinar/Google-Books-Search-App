@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{image}}" alt="{{ title}}-thumbnail">
+            <hr>
+            {% if average_rating %}
+            <div>
+                <div class="stars-outer">
+                    <div class="stars-inner"></div>
+                </div>
+                <span class="number-rating">{{ average_rating }}</span>
+                <span>({{ ratings_count}} ratings)</span>
+            </div>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <form>
+                <select id="read_status" name="read_status" onchange="get_read_status()">
+                    <option>---</option>
+                    <option id="R" {% if book.read_status == "R" %}  selected {% endif %}
+                        value="R">
+                        {% if book.read_status == "R" %}
+                        &#xf00c;
+                        {% endif %}
+                        Read
+                    </option>
+                    <option id="W" {% if book.read_status == "W" %} selected {% endif %} value="W">
+                        {% if book.read_status == "W" %}
+                        &#xf00c;
+                        {% endif %}
+                        Want to Read
+                    </option>
+                    <option id="C" {% if book.read_status == "C" %} selected {% endif %} value="C">
+                        {% if book.read_status == "C" %}
+                        &#xf00c;
+                        {% endif %}
+                        Currently Reading
+                    </option>
+                </select>
+            </form>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h2>{{title}}</h2>
+            <hr>
+            <div class="book-detail-info">
+                <p class="text-muted">{{ author }}</p>
+                <p class="text-muted">{{ publisher }}</p>
+            </div>
+            <p>{{ description }}</p>
+
+            <!--BOOK INFO-->
+            <h4>Book Informations</h4>
+            <hr>
+            <div class="floats">
+                <div class="info-title">Original Title</div>
+                <div class="info-item">{{title}}</div>
+            </div>
+            {% if isbn %}
+            <div class="floats">
+                <div class="info-title">ISBN</div>
+                <div class="info-item">{{isbn}}</div>
+            </div>
+            {% endif %}
+            {% if language %}
+            <div class="floats">
+                <div class="info-title">Language</div>
+                <div class="info-item">{{language}}</div>
+            </div>
+            {% endif %}
+            {% if pageCount %}
+            <div class="floats">
+                <div class="info-title">Number Of Pages</div>
+                <div class="info-item">{{pageCount}}</div>
+            </div>
+            {% endif %}
+            {% if publisher %}
+            <div class="floats">
+                <div class="info-title">Publisher</div>
+                <div class="info-item">{{publisher}}</div>
+            </div>
+            {% endif %}
+            {% if publishedDate %}
+            <div class="floats">
+                <div class="info-title">Publish Date</div>
+                <div class="info-item">{{publishedDate}}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //STAR
+    const starsTotal = 5;
+
+    rating = document.querySelector('.number-rating').innerHTML;
+
+
+    document.addEventListener('DOMContentLoaded', getRatings)
+
+    //Get Ratings
+    function getRatings() {
+        const starPercentage = (rating / starsTotal) * 100;
+
+
+        const starPercentageRounded = `${Math.round(starPercentage/10)*10}%`
+        console.log(starPercentageRounded)
+
+        //Set width of stars-inner to percentage
+        document.querySelector('.stars-inner').style.width = starPercentageRounded;
+    }
+
+
+
+
+    function get_read_status() {
+        $.ajax({
+            url: "{% url  'add_book' id %}",
+            data: {
+                'read_status': $('#read_status').val()
+            },
+            success: function (data) {
+                console.log(data)
+                console.log($('#R').html())
+                if (data.read_status == "R") {
+
+                    $('#W').html('Want to Read');
+                    $('#C').html('Currenly Reading');
+                    $('#R').html(' &#xf00c;   Read ');
+
+                } else if (data.read_status == "W") {
+
+                    $('#R').html('Read');
+                    $('#C').html('Currenly Reading');
+                    $('#W').html(' &#xf00c;   Want to Read  ');
+
+                } else if (data.read_status == "C") {
+
+                    $('#W').html('Want to Read');
+                    $('#R').html('Read');
+                    $('#C').html(' &#xf00c;   Currently Reading ');
+                }
+            }
+        })
+    }
+</script>
+
+{% endblock content %}
