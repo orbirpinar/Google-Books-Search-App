@@ -2,7 +2,7 @@ Screenshots
 
 **HOME PAGE**
 
-![home](C:\Users\orhan\Desktop\git\google_books\screenshoots\home.png)
+![home](screenshots/home.png?raw=true "Home")
 
 
 
@@ -10,7 +10,7 @@ Screenshots
 
 **Search**
 
-![search](C:\Users\orhan\Desktop\git\google_books\screenshoots\search.png)
+![search](screenshots/search.png?raw=true "Search")
 
 
 
@@ -18,13 +18,13 @@ Screenshots
 
 **Registiration**
 
-![register](C:\Users\orhan\Desktop\git\google_books\screenshoots\register.png)
+![register](screenshots/register.png?raw=true "Register")
 
 `**************************************************************************************`
 
 **Profile Page**
 
-![profile](C:\Users\orhan\Desktop\git\google_books\screenshoots\profile.png)
+![profile](screenshots/profile.png?raw=true "Profile")
 
 
 
@@ -36,6 +36,7 @@ You can select read status for the specific books. If book does not exists for u
 
 Otherwise just change read status.
 
-You can delete your books in the My Books page. if you want 
+You can delete your books in the My Books page. if you want.
+All create and delete books process made using Ajax
 
-![myBooks](C:\Users\orhan\Desktop\git\google_books\screenshoots\myBooks.gif)
+![myBooks](screenshots/myBooks.gif?raw=true "myBooks")
